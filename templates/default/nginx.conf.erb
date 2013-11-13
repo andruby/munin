@@ -8,10 +8,6 @@ server {
   error_log <%= File.join(node['nginx']['log_dir'], 'nginx_error.log') %>;
 
   location /munin {
-    root <%= node['munin']['docroot'] %>;
-  }
-
-  location / {
     auth_basic "Munin Server";
     auth_basic_user_file <%= File.join(node['munin']['basedir'], 'htpasswd.users') %>;
     root <%= node['munin']['docroot'] %>;
