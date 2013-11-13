@@ -36,5 +36,8 @@ host_name <%= node['hostname'] %>.ec2.internal
 <% @munin_servers.each do |server| -%>
 allow ^<%= server['ipaddress'].to_s.gsub(/\./, '\.') %>$
 <% end -%>
+<% node['munin']['allow_ips'].each do |ip| -%>
+allow ^<%= ip.to_s.gsub(/\./, '\.') %>$
+<% end -%>
 allow ^127\.0\.0\.1$
 
