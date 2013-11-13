@@ -29,4 +29,10 @@ max_cgi_graph_jobs <%= node['munin']['max_cgi_graph_jobs'] %>
     use_node_name yes
 
 <% end -%>
+<% node['munin']['extra_nodes'].each do |name, ip| -%>
+[<%= name %>]
+    address <%= ip %>
+    use_node_name yes
+
+<% end -%>
 
