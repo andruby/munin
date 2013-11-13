@@ -2,14 +2,14 @@
 # Do NOT modify this file by hand!
 
 server {
-  listen <%= node['munin']['web_server_port'] %>;
-  server_name munin <%= node['munin']['public_domain'] %> <%= node['fqdn'] %>;
+  listen [::]:<%= node['munin']['web_server_port'] %>;
+  server_name <%= node['munin']['public_domain'] %>;
   access_log <%= File.join(node['nginx']['log_dir'], 'nginx_access.log') %>;
   error_log <%= File.join(node['nginx']['log_dir'], 'nginx_error.log') %>;
+  root <%= node['munin']['docroot'] %>;
 
-  location /munin {
+  location / {
     auth_basic "Munin Server";
     auth_basic_user_file <%= File.join(node['munin']['basedir'], 'htpasswd.users') %>;
-    root <%= node['munin']['docroot'] %>;
   }
 }
